@@ -132,7 +132,7 @@ never mutate the repo.
 ## Testing
 
 - Happy path: real run now. `draft-sept26` is 12 commits behind `upstream/main` with no dry-run
-  conflicts. Push only on Yash's yes.
+  conflicts. Push only on the user's explicit yes.
 - Conflict path: `scripts/test.sh` adds a throwaway worktree at a3e2b6490 (draft-sept26, 14 Sep),
   runs `incoming.sh 9746749c6` (upstream as of 18 Sep; asserts sections, `infra/gcp/main.tf` in
   DRYRUN_CONFLICTS, `build.yaml` flagged), merges 9746749c6 with zdiff3 to reproduce the conflict
