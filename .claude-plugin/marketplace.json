@@ -8,7 +8,7 @@
     {
       "name": "hail",
       "source": "./hail",
-      "description": "Operating CPG's fork of Hail Batch: weekly upstream merges with explained conflict resolution",
+      "description": "Skills for maintaining and operating the Centre for Population Genomics' fork of Hail (Hail Batch and Hail Query)",
       "version": "0.1.0"
     }
   ]
