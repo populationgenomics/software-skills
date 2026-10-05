@@ -1,6 +1,6 @@
 # hail-merge-upstream — design
 
-Date: 2026-10-05. Owner: Yash. Location: `hail/skills/hail-merge-upstream/` in populationgenomics/software-skills (plugin `hail`); originally built as a personal skill in `~/.claude/skills/`.
+Date: 2026-10-05. Location: `hail/skills/hail-merge-upstream/` in populationgenomics/software-skills (plugin `hail`); originally built as a personal skill in `~/.claude/skills/`.
 
 ## Intent
 
@@ -9,7 +9,7 @@ draft branch was last synced, resolve conflicts with an understanding of *why* e
 commit in the team's style, push. Pain points today: repetitive mechanics, and not knowing enough
 about upstream's change or our own historical divergence to choose ours/theirs confidently.
 
-What Yash said:
+Requirements from the maintainer:
 - Follow team-docs "Merging upstream changes" (hail.md), draft-branch convention, commit style on
   `draft-sept26`.
 - Prompt for a branch name when needed; work interactively.
@@ -18,7 +18,7 @@ What Yash said:
 - Merge "whatever hasn't been merged since last time".
 - No local checks; CI handles it. Ask before pushing. Weekly merge only; personal install.
 
-Assumptions (confirmed in chat):
+Assumptions (confirmed with the maintainer):
 - "Since last time" == `upstream/main` tip. An optional ref argument overrides the target.
 - One long-lived `draft-*` branch per release cycle; reuse the open one.
 - Commit message: `Merge upstream as of <D Month YYYY>`.
@@ -136,7 +136,7 @@ never mutate the repo.
 - Conflict path: `scripts/test.sh` adds a throwaway worktree at a3e2b6490 (draft-sept26, 14 Sep),
   runs `incoming.sh 9746749c6` (upstream as of 18 Sep; asserts sections, `infra/gcp/main.tf` in
   DRYRUN_CONFLICTS, `build.yaml` flagged), merges 9746749c6 with zdiff3 to reproduce the conflict
-  piyumi resolved in 2ebd3a71d, runs `conflict_context.sh infra/gcp/main.tf 9746749c6` (asserts
+  resolved by hand in 2ebd3a71d, runs `conflict_context.sh infra/gcp/main.tf 9746749c6` (asserts
   sections, HUNK 1, base section, an upstream PR number), then aborts and removes the worktree.
   Also checks: 0-incoming case, non-zdiff3 markers, usage errors exit 2.
 - Scripts have `set -euo pipefail`; a missing-arg call prints usage and exits 2.
