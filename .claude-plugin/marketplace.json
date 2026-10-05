@@ -1,0 +1,15 @@
+{
+  "name": "populationgenomics",
+  "description": "Agent skills from the Centre for Population Genomics, packaged as Claude Code plugins",
+  "owner": {
+    "name": "Centre for Population Genomics"
+  },
+  "plugins": [
+    {
+      "name": "hail",
+      "source": "./hail",
+      "description": "Operating CPG's fork of Hail Batch: weekly upstream merges with explained conflict resolution",
+      "version": "0.1.0"
+    }
+  ]
+}
