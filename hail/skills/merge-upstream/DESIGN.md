@@ -1,6 +1,6 @@
-# hail-merge-upstream — design
+# merge-upstream — design
 
-Date: 2026-10-05. Location: `hail/skills/hail-merge-upstream/` in populationgenomics/software-skills (plugin `hail`); originally built as a personal skill in `~/.claude/skills/`.
+Date: 2026-10-05. Location: `hail/skills/merge-upstream/` in populationgenomics/software-skills (plugin `hail`); originally built as a personal skill in `~/.claude/skills/`.
 
 ## Intent
 
@@ -34,7 +34,7 @@ cpg tag, terraform, smoke test, dependent-repo bumps, comms text.
 ## Files
 
 ```
-~/.claude/skills/hail-merge-upstream/
+~/.claude/skills/merge-upstream/
   SKILL.md                    # the procedure; disable-model-invocation: true
   DESIGN.md                   # this file
   scripts/incoming.sh         # digest data: last sync, incoming commits, flagged files, dry-run conflicts

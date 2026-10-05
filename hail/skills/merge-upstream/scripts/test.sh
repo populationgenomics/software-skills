@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Self-check for hail-merge-upstream scripts against a real historical conflict in the CPG hail fork.
+# Self-check for merge-upstream scripts against a real historical conflict in the CPG hail fork.
 #   ours   = a3e2b6490  draft-sept26 as of 14 Sep 2026
 #   theirs = 9746749c6  upstream/main as of 18 Sep 2026
 # Merging theirs into ours conflicts only in infra/gcp/main.tf (resolved by hand in 2ebd3a71d)

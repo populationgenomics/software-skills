@@ -1,5 +1,5 @@
 ---
-name: hail-merge-upstream
+name: merge-upstream
 description: Weekly merge of upstream hail-is/hail into the CPG fork's current draft branch. Digests incoming commits, explains every conflict from both sides' history, asks before each resolution, commits in team style, pushes only on request.
 disable-model-invocation: true
 argument-hint: "[upstream ref — default upstream/main]"

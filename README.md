@@ -10,7 +10,7 @@ Skills are grouped by domain into [Claude Code plugins](https://docs.claude.com/
 
 | Plugin | Skill | What it does |
 | --- | --- | --- |
-| `hail` | [`hail-merge-upstream`](hail/skills/hail-merge-upstream/SKILL.md) | The weekly merge of upstream `hail-is/hail` into our fork's draft branch. Digests incoming commits, flags ones that touch files where our fork differs, explains every conflict from both sides' history, lets you decide each hunk, and lists the out-of-repo chores a merge creates (image mirrors, worker VM images). |
+| `hail` | [`merge-upstream`](hail/skills/merge-upstream/SKILL.md) | The weekly merge of upstream `hail-is/hail` into our fork's draft branch. Digests incoming commits, flags ones that touch files where our fork differs, explains every conflict from both sides' history, lets you decide each hunk, and lists the out-of-repo chores a merge creates (image mirrors, worker VM images). |
 
 ## Installing
 
@@ -23,7 +23,7 @@ Register this repository as a marketplace once, then install the plugins you wan
 /plugin install hail@populationgenomics
 ```
 
-Plugin skills are namespaced, so the skill above is invoked as `/hail:hail-merge-upstream`. Run `/plugin` to see installed plugins, check for updates, or uninstall.
+Plugin skills are namespaced, so the skill above is invoked as `/hail:merge-upstream`. Run `/plugin` to see installed plugins, check for updates, or uninstall.
 
 ### Other agents, or without plugins
 
@@ -31,7 +31,7 @@ Clone the repository and point your agent at a skill folder. For Claude Code wit
 
 ```bash
 git clone git@github.com:populationgenomics/software-skills.git
-ln -s "$PWD/software-skills/hail/skills/hail-merge-upstream" ~/.claude/skills/hail-merge-upstream
+ln -s "$PWD/software-skills/hail/skills/merge-upstream" ~/.claude/skills/merge-upstream
 ```
 
 Skills reference their own scripts through `${CLAUDE_SKILL_DIR}`, so they work the same whether installed as a plugin, a personal skill, or a project skill.
@@ -46,7 +46,7 @@ software-skills/
 │   ├── .claude-plugin/
 │   │   └── plugin.json
 │   └── skills/
-│       └── hail-merge-upstream/
+│       └── merge-upstream/
 │           ├── SKILL.md        # the instructions the agent follows
 │           ├── DESIGN.md       # why it works the way it does
 │           └── scripts/        # helpers the skill runs, plus a self-test
@@ -68,7 +68,7 @@ software-skills/
    ```
 
    Then write the procedure. Be concrete about commands, what to show the user, and where to stop and ask. Say what the skill must never do.
-3. Put helper scripts in `scripts/` and reference them as `${CLAUDE_SKILL_DIR}/scripts/<name>`. Keep scripts read-only where you can, and leave a runnable self-test behind (`scripts/test.sh` in `hail-merge-upstream` is an example).
+3. Put helper scripts in `scripts/` and reference them as `${CLAUDE_SKILL_DIR}/scripts/<name>`. Keep scripts read-only where you can, and leave a runnable self-test behind (`scripts/test.sh` in `merge-upstream` is an example).
 4. Add the skill to the table in this README.
 5. Run `claude plugin validate .` from the repository root, open a pull request, and ask someone who will use the skill to try it.
 
