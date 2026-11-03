@@ -11,6 +11,7 @@ Skills are grouped by domain into [Claude Code plugins](https://docs.claude.com/
 | Plugin | Skill | What it does |
 | --- | --- | --- |
 | `hail` | [`merge-upstream`](hail/skills/merge-upstream/SKILL.md) | The weekly merge of upstream `hail-is/hail` into our fork's draft branch. Digests incoming commits, flags ones that touch files where our fork differs, explains every conflict from both sides' history, lets you decide each hunk, and lists the out-of-repo chores a merge creates (image mirrors, worker VM images). |
+| `hail` | [`renew-certs`](hail/skills/renew-certs/SKILL.md) | Renews the Let's Encrypt TLS certificates. Starts the `hail-dev` VM, runs `cert_renewal.sh` on it as you, checks the new expiry date, and stops the VM again. |
 
 ## Installing
 
