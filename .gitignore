@@ -1,5 +1,6 @@
 # Pipeline outputs contain real emails, project IDs and access paths.
 out/
 permvis-out/
+prod-stack.json
 __pycache__/
 .DS_Store

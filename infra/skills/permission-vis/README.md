@@ -28,6 +28,17 @@ groups?".
 Update after a new version is pushed:
 `claude plugin update infra@populationgenomics`.
 
+## Prerequisite: production stack file
+
+Run the skill inside a directory that contains the raw production stack file
+from the Pulumi state bucket. Fetch it with:
+
+```sh
+gcloud storage cat gs://cpg-pulumi-state/.pulumi/stacks/datasets/production.json > prod-stack.json
+```
+
+Keep this file out of git.
+
 ## Develop
 
 From the repository root:
