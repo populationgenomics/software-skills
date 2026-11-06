@@ -2,6 +2,7 @@
 name: permission-vis
 description: Visualise how principals (service accounts, users, groups) get permissions on cloud resources through nested Google groups, using Pulumi state (e.g. prod-stack.json). Use when asked "how does X get write/read access to Y", "which buckets can these service accounts write to", "who can access this secret/bucket/project", to trace group hierarchies or IAM inheritance in a Pulumi stack, or to produce a permission-flow diagram/graphic like notebook_sa_write_flow.svg.
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/permvis.py *)
+disable-model-invocation: true
 ---
 
 # Permission flow visualisation from Pulumi state
@@ -144,6 +145,6 @@ the user asks.
 
 ## Tests
 
-The plugin repo has an end-to-end test on a synthetic fixture (~1 s). Run it
-from the repo root after changing `permvis.py`:
-`python3 -m unittest discover tests`.
+This skill has an end-to-end test on a synthetic fixture (~1 s). Run it after
+changing `permvis.py`:
+`cd ${CLAUDE_SKILL_DIR} && python3 -m unittest discover tests`.

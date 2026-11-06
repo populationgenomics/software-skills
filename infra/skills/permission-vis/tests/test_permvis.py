@@ -1,7 +1,7 @@
 """
 End-to-end test of permvis on a small synthetic Pulumi checkpoint.
 
-Run from the repository root:
+Run from the skill directory (infra/skills/permission-vis):
     python3 -m unittest discover tests
 """
 
@@ -12,8 +12,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-PIPELINE = Path(__file__).resolve().parent.parent
-PERMVIS = PIPELINE / 'skills' / 'permission-vis' / 'scripts' / 'permvis.py'
+SKILL_DIR = Path(__file__).resolve().parent.parent
+PERMVIS = SKILL_DIR / 'scripts' / 'permvis.py'
 DOMAIN = '@example.org'
 MUTATE = 'organizations/1/roles/StorageObjectAndBucketMutator'
 VIEW = 'organizations/1/roles/StorageObjectAndBucketViewer'

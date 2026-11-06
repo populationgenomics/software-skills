@@ -1,57 +1,79 @@
-# permission-vis
+# software-skills
 
-Claude Code plugin for CPG. It turns Pulumi state into diagrams showing how
-principals (service accounts, users, groups) get permissions on resources
-through nested Google groups.
+Skills for coding agents, written and maintained by the [Centre for Population Genomics](https://populationgenomics.org.au).
+
+A skill is a folder holding a `SKILL.md` with instructions, plus any scripts and reference files the agent needs. Agents load a skill on demand, so the instructions cost nothing until they are used. The format follows the [Agent Skills standard](https://agentskills.io), so these skills work in Claude Code and in other agents that read `SKILL.md`.
+
+Skills are grouped by domain into [Claude Code plugins](https://docs.claude.com/en/docs/claude-code/plugins). This repository is also a plugin marketplace, so a plugin and every skill in it can be installed with two commands.
+
+## Skills
+
+| Plugin | Skill | What it does |
+| --- | --- | --- |
+| `hail` | [`merge-upstream`](hail/skills/merge-upstream/SKILL.md) | The weekly merge of upstream `hail-is/hail` into our fork's draft branch. Digests incoming commits, flags ones that touch files where our fork differs, explains every conflict from both sides' history, lets you decide each hunk, and lists the out-of-repo chores a merge creates (image mirrors, worker VM images). |
+
+## Installing
+
+### Claude Code
+
+Register this repository as a marketplace once, then install the plugins you want:
 
 ```
-.
+/plugin marketplace add populationgenomics/software-skills
+/plugin install hail@populationgenomics
+```
+
+Plugin skills are namespaced, so the skill above is invoked as `/hail:merge-upstream`. Run `/plugin` to see installed plugins, check for updates, or uninstall.
+
+### Other agents, or without plugins
+
+Clone the repository and point your agent at a skill folder. For Claude Code without plugins, symlink a skill into your personal skills directory:
+
+```bash
+git clone git@github.com:populationgenomics/software-skills.git
+ln -s "$PWD/software-skills/hail/skills/merge-upstream" ~/.claude/skills/merge-upstream
+```
+
+Skills reference their own scripts through `${CLAUDE_SKILL_DIR}`, so they work the same whether installed as a plugin, a personal skill, or a project skill.
+
+## Repository layout
+
+```
+software-skills/
 ├── .claude-plugin/
-│   ├── plugin.json          # plugin manifest
-│   └── marketplace.json     # makes this repo a marketplace ("cpg-tools")
-├── skills/permission-vis/
-│   ├── SKILL.md             # how Claude drives the pipeline
-│   ├── scripts/permvis.py   # the pipeline: extract | list | analyze | render (stdlib only)
-│   └── examples/            # hand-polished and auto-rendered reference diagrams
-└── tests/test_permvis.py    # end-to-end test on a synthetic state file
+│   └── marketplace.json        # lists the plugins in this repository
+├── hail/                       # one plugin per domain
+│   ├── .claude-plugin/
+│   │   └── plugin.json
+│   └── skills/
+│       └── merge-upstream/
+│           ├── SKILL.md        # the instructions the agent follows
+│           ├── DESIGN.md       # why it works the way it does
+│           └── scripts/        # helpers the skill runs, plus a self-test
+├── LICENSE
+└── README.md
 ```
 
-## Install
+## Adding a skill
 
-```sh
-claude plugin marketplace add <github-owner>/<repo>    # or a git URL / local path
-claude plugin install permission-vis@cpg-tools --scope user
-```
+1. Pick the plugin that matches the domain, or create a new one: a folder at the repository root with `.claude-plugin/plugin.json` and a `skills/` directory, plus an entry in `.claude-plugin/marketplace.json`.
+2. Create `<plugin>/skills/<skill-name>/SKILL.md`. Start with frontmatter:
 
-In a session: `/plugin marketplace add ...` then `/plugin install permission-vis@cpg-tools`.
-The skill is invoked as `/permission-vis:permission-vis`, or loads
-automatically when you ask e.g. "which buckets can the notebook service
-accounts write to, and through which groups?".
+   ```yaml
+   ---
+   name: skill-name
+   description: One sentence saying what the skill does and when to use it. The agent reads this to decide when the skill applies.
+   disable-model-invocation: true   # only for skills a person should start deliberately
+   ---
+   ```
 
-Update after a new version is pushed:
-`claude plugin update permission-vis@cpg-tools`.
+   Then write the procedure. Be concrete about commands, what to show the user, and where to stop and ask. Say what the skill must never do.
+3. Put helper scripts in `scripts/` and reference them as `${CLAUDE_SKILL_DIR}/scripts/<name>`. Keep scripts read-only where you can, and leave a runnable self-test behind (`scripts/test.sh` in `merge-upstream` is an example).
+4. Add the skill to the table in this README.
+5. Run `claude plugin validate .` from the repository root, open a pull request, and ask someone who will use the skill to try it.
 
-## Develop
+A good skill is written for a capable engineer who does not know our systems: it names the files, the commands, and the people to ask, and it explains the why when the what is surprising. The [skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) are worth a read before your first one.
 
-```sh
-claude plugin validate .
-claude --plugin-dir .          # load for one session; /reload-plugins after edits
-python3 -m unittest discover tests
-```
+## License
 
-## Use without Claude
-
-```sh
-S=skills/permission-vis/scripts/permvis.py
-python3 $S extract prod-stack.json -o permvis-out/graph.json
-python3 $S list permvis-out/graph.json roles --kind '^storage/bucket$'
-python3 $S analyze permvis-out/graph.json \
-  --principal '^notebook-.+@notebooks-' --key '^notebook-(?P<key>.+?)@' \
-  --kind '^storage/bucket$' --role 'Mutator|Creator' \
-  --self-label '<ds>' --other-label '<dep>' \
-  -o permvis-out/pattern.json --report permvis-out/access.txt
-python3 $S render permvis-out/pattern.json -o permvis-out/flow.svg
-```
-
-Outputs contain real emails, project IDs and access paths: keep
-`permvis-out/` out of git (see `.gitignore`).
+[MIT](LICENSE)
