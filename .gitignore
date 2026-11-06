@@ -1,0 +1,5 @@
+# Pipeline outputs contain real emails, project IDs and access paths.
+out/
+permvis-out/
+__pycache__/
+.DS_Store

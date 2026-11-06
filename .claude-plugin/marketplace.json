@@ -1,0 +1,11 @@
+{
+  "name": "cpg-tools",
+  "owner": { "name": "Centre for Population Genomics" },
+  "plugins": [
+    {
+      "name": "permission-vis",
+      "source": "./",
+      "description": "Permission flow diagrams from CPG Pulumi state"
+    }
+  ]
+}

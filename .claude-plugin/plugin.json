@@ -1,0 +1,5 @@
+{
+  "name": "permission-vis",
+  "description": "Visualise how CPG principals reach IAM permissions through nested Google groups, from Pulumi state",
+  "version": "0.1.0"
+}

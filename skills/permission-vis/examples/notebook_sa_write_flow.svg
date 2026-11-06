@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="860" viewBox="0 0 1300 860" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <title>How a notebook service account gets write access to buckets for a dataset</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f766e"/>
+    </marker>
+    <marker id="arrow-write" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
+    </marker>
+    <style>
+      .mono { font-family: Menlo, Consolas, monospace; }
+      .sa { fill: #ede9fe; stroke: #6d28d9; stroke-width: 1.5; }
+      .grp { fill: #e0f2fe; stroke: #0369a1; stroke-width: 1.5; }
+      .wgrp { fill: #e0f2fe; stroke: #c2410c; stroke-width: 2.5; }
+      .bkt { fill: #dcfce7; stroke: #15803d; stroke-width: 1.5; }
+      .off { fill: #f3f4f6; stroke: #9ca3af; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .member { stroke: #4b5563; stroke-width: 1.8; fill: none; marker-end: url(#arrow); }
+      .nested { stroke: #0f766e; stroke-width: 1.6; fill: none; stroke-dasharray: 6 4; marker-end: url(#arrow-teal); }
+      .write { stroke: #c2410c; stroke-width: 2.4; fill: none; marker-end: url(#arrow-write); }
+      .note { fill: #4b5563; font-size: 11px; }
+      .h { font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="30" y="34" font-size="20" class="h">How a notebook service account gets write access to buckets for dataset &lt;ds&gt;</text>
+  <text x="30" y="56" class="note" font-size="12">Summarised from prod-stack.json (81 notebook SAs). All write access comes from *-test-full groups holding StorageObjectAndBucketMutator (MUTATE) on test buckets.</text>
+
+  <!-- Bucket column heading -->
+  <text x="1145" y="84" text-anchor="middle" class="h">Buckets (write)</text>
+
+  <!-- ========== Nodes ========== -->
+  <!-- Service account -->
+  <rect class="sa" x="30" y="273" width="180" height="54" rx="8"/>
+  <text x="120" y="296" text-anchor="middle" class="h">Notebook SA</text>
+  <text x="120" y="314" text-anchor="middle" class="mono" font-size="11">notebook-&lt;ds&gt;@notebooks-…</text>
+
+  <!-- <ds>-analysis -->
+  <rect class="grp" x="260" y="273" width="190" height="54" rx="8"/>
+  <text x="355" y="305" text-anchor="middle" class="mono">&lt;ds&gt;-analysis</text>
+
+  <!-- Row A: own dataset -->
+  <rect class="wgrp" x="500" y="93" width="200" height="54" rx="8"/>
+  <text x="600" y="125" text-anchor="middle" class="mono">&lt;ds&gt;-test-full</text>
+  <text x="600" y="164" text-anchor="middle" class="note">79 of 81 datasets. Absent where the dataset</text>
+  <text x="600" y="178" text-anchor="middle" class="note">has no test env (sapath-clinical, vcgs-clinical)</text>
+
+  <rect class="bkt" x="1020" y="92" width="250" height="100" rx="8"/>
+  <text x="1145" y="112" text-anchor="middle" class="h">Own dataset</text>
+  <text x="1035" y="132" class="mono" font-size="11.5">cpg-&lt;ds&gt;-test</text>
+  <text x="1035" y="148" class="mono" font-size="11.5">cpg-&lt;ds&gt;-test-analysis</text>
+  <text x="1035" y="164" class="mono" font-size="11.5">cpg-&lt;ds&gt;-test-tmp</text>
+  <text x="1035" y="180" class="mono" font-size="11.5">cpg-&lt;ds&gt;-test-{upload,web}</text>
+
+  <!-- Row B: common -->
+  <rect class="grp" x="500" y="273" width="200" height="54" rx="8"/>
+  <text x="600" y="305" text-anchor="middle" class="mono">common-analysis</text>
+  <text x="600" y="344" text-anchor="middle" class="note">every dataset's analysis group</text>
+  <text x="600" y="358" text-anchor="middle" class="note">is a member (81 of 81)</text>
+
+  <rect class="wgrp" x="760" y="273" width="200" height="54" rx="8"/>
+  <text x="860" y="305" text-anchor="middle" class="mono">common-test-full</text>
+
+  <rect class="bkt" x="1020" y="250" width="250" height="100" rx="8"/>
+  <text x="1145" y="270" text-anchor="middle" class="h">common dataset</text>
+  <text x="1035" y="290" class="mono" font-size="11.5">cpg-common-test</text>
+  <text x="1035" y="306" class="mono" font-size="11.5">cpg-common-test-analysis</text>
+  <text x="1035" y="322" class="mono" font-size="11.5">cpg-common-test-tmp</text>
+  <text x="1035" y="338" class="mono" font-size="11.5">cpg-common-test-{upload,web}</text>
+
+  <!-- Row C: dependencies -->
+  <rect class="grp" x="500" y="453" width="200" height="54" rx="8"/>
+  <text x="600" y="485" text-anchor="middle" class="mono">&lt;dep&gt;-analysis</text>
+
+  <rect class="wgrp" x="760" y="453" width="200" height="54" rx="8"/>
+  <text x="860" y="485" text-anchor="middle" class="mono">&lt;dep&gt;-test-full</text>
+
+  <rect class="bkt" x="1020" y="430" width="250" height="100" rx="8"/>
+  <text x="1145" y="450" text-anchor="middle" class="h">Each dependency dataset</text>
+  <text x="1035" y="470" class="mono" font-size="11.5">cpg-&lt;dep&gt;-test</text>
+  <text x="1035" y="486" class="mono" font-size="11.5">cpg-&lt;dep&gt;-test-analysis</text>
+  <text x="1035" y="502" class="mono" font-size="11.5">cpg-&lt;dep&gt;-test-tmp</text>
+  <text x="1035" y="518" class="mono" font-size="11.5">cpg-&lt;dep&gt;-test-{upload,web}</text>
+
+  <!-- ========== Edges ========== -->
+  <!-- SA -> <ds>-analysis -->
+  <path class="member" d="M210,300 L258,300"/>
+
+  <!-- <ds>-analysis -> <ds>-test-full / common-analysis / <dep>-analysis -->
+  <path class="member" d="M450,292 C478,292 470,120 498,120"/>
+  <path class="member" d="M450,300 L498,300"/>
+  <path class="member" d="M450,308 C478,308 470,480 498,480"/>
+
+  <!-- analysis -> test-full within common / dep -->
+  <path class="member" d="M700,310 L758,310"/>
+  <path class="member" d="M700,490 L758,490"/>
+
+  <!-- Parallel route: <ds>-test-full nested in common-test-full and <dep>-test-full -->
+  <path class="nested" d="M700,124 Q740,124 740,140 L740,276 Q740,290 754,290 L758,290"/>
+  <path class="nested" d="M700,140 Q716,140 716,156 L716,456 Q716,470 730,470 L758,470"/>
+
+  <!-- Dependency recursion -->
+  <path class="member" d="M560,507 C560,575 640,575 640,509"/>
+  <text x="600" y="592" text-anchor="middle" class="note">repeats for each &lt;dep&gt;'s own dependencies (transitive)</text>
+
+  <!-- Write grants -->
+  <path class="write" d="M700,112 L1018,112"/>
+  <text x="860" y="104" text-anchor="middle" class="note">MUTATE</text>
+  <path class="write" d="M960,300 L1018,300"/>
+  <path class="write" d="M960,480 L1018,480"/>
+
+  <!-- Dependency examples -->
+  <text x="30" y="470" class="note">&lt;dep&gt; = a dataset that &lt;ds&gt; depends on.</text>
+  <text x="30" y="484" class="note">Its analysis and test-full groups contain</text>
+  <text x="30" y="498" class="note">&lt;ds&gt;-analysis and &lt;ds&gt;-test-full.</text>
+  <text x="30" y="618" class="note">Examples: rare-disease-analysis is in 45 other datasets' analysis groups. seqr and talos sit inside rare-disease,</text>
+  <text x="30" y="632" class="note">so notebook-seqr / notebook-talos can write to 240 test buckets. Most notebook SAs (64 of 81) reach only their own and common's 10.</text>
+
+  <!-- ========== Not reachable ========== -->
+  <rect class="off" x="30" y="660" width="1240" height="96" rx="8"/>
+  <text x="46" y="684" class="h" fill="#374151">Not writable by the notebook SA: main buckets (e.g. cpg-&lt;ds&gt;-main-analysis)</text>
+  <text x="46" y="706" fill="#374151">• Write on main buckets is held by &lt;ds&gt;-full (MUTATE) and &lt;ds&gt;-main-create (APPEND). &lt;ds&gt;-analysis is not a member of either.</text>
+  <text x="46" y="726" fill="#374151">• &lt;ds&gt;-analysis gets READ only on cpg-&lt;ds&gt;-main-analysis, so the notebook SA can read but not write it.</text>
+  <text x="46" y="746" fill="#374151">• No bucket or project grant gives a notebook SA write access directly. Every route above goes through &lt;ds&gt;-analysis.</text>
+
+  <!-- ========== Legend ========== -->
+  <g transform="translate(30,790)">
+    <path class="member" d="M0,8 L40,8"/>
+    <text x="50" y="12">is a member of</text>
+    <path class="nested" d="M180,8 L220,8"/>
+    <text x="230" y="12">parallel route: &lt;ds&gt;-test-full nested in another test-full group</text>
+    <path class="write" d="M690,8 L730,8"/>
+    <text x="740" y="12">write grant (StorageObjectAndBucketMutator)</text>
+    <rect class="wgrp" x="1050" y="-2" width="24" height="18" rx="3"/>
+    <text x="1082" y="12">group holding write role</text>
+  </g>
+  <text x="30" y="840" class="note">Scope: access managed by this Pulumi stack only. Manual grants and other stacks are not shown.</text>
+</svg>

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1517" height="1088" viewBox="0 0 1517 1088" font-family="Helvetica, Arial, sans-serif" font-size="13">
+<title>How a notebook service account gets write access to buckets</title>
+<defs><marker id="a-member" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/></marker><marker id="a-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f766e"/></marker><marker id="a-grant" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker><style>
+  .mono { font-family: Menlo, Consolas, monospace; }
+  .principal { fill: #ede9fe; stroke: #6d28d9; stroke-width: 1.5; }
+  .group { fill: #e0f2fe; stroke: #0369a1; stroke-width: 1.5; }
+  .grantee { fill: #e0f2fe; stroke: #c2410c; stroke-width: 2.5; }
+  .resource { fill: #dcfce7; stroke: #15803d; stroke-width: 1.5; }
+  .off { fill: #f3f4f6; stroke: #9ca3af; stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .member { stroke: #4b5563; stroke-width: 1.7; fill: none; marker-end: url(#a-member); }
+  .back { stroke: #0f766e; stroke-width: 1.5; fill: none; stroke-dasharray: 6 4; marker-end: url(#a-back); }
+  .grant { stroke: #c2410c; stroke-width: 2.3; fill: none; marker-end: url(#a-grant); }
+  .note { fill: #4b5563; font-size: 11px; }
+  .h { font-weight: bold; }
+</style></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="30" y="38" font-size="20" class="h">How a notebook service account gets write access to buckets</text>
+<text x="30" y="60" class="note" font-size="12">Source: prod-stack.json | 81 principal(s) matching ^notebook-.+@notebooks- | kind ~ ^storage/bucket$ | role ~ Mutator|Creator</text>
+<text x="1277.5" y="94" text-anchor="middle" class="h">Resources</text>
+<path class="member" d="M788.2,133.0 C832.2,133.0 832.2,125.0 876.2,125.0"/>
+<path class="member" d="M308.20000000000005,141.0 C352.20000000000005,141.0 352.20000000000005,141.0 396.20000000000005,141.0"/>
+<path class="member" d="M548.2,133.0 C592.2,133.0 592.2,129.0 636.2,129.0"/>
+<path class="member" d="M548.2,141.0 C592.2,141.0 592.2,221.0 636.2,221.0"/>
+<path class="member" d="M548.2,149.0 C581.2,149.0 581.2,174.0 614.2,174.0 L812.2,174.0 C844.4000000000001,174.0 844.4000000000001,221.0 876.6,221.0"/>
+<path class="back" d="M788.2,217.0 C833.2,217.0 833.2,137.0 790.2,137.0"/>
+<path class="back" d="M1028.6,217.0 C1074.0,217.0 1074.0,133.0 1031.0,133.0"/>
+<path class="member" d="M683.2,252.0 C683.2,294.0 743.2,294.0 743.2,254.0"/>
+<path class="member" d="M788.2,225.0 C832.4000000000001,225.0 832.4000000000001,313.0 876.6,313.0"/>
+<path class="back" d="M1028.6,225.0 C1074.0,225.0 1074.0,321.0 1030.6,321.0"/>
+<path class="back" d="M1028.6,317.0 C1074.0,317.0 1074.0,141.0 1031.0,141.0"/>
+<path class="member" d="M923.6,348.0 C923.6,390.0 983.6,390.0 983.6,350.0"/>
+<path class="grant" d="M1029.0,133.0 C1073.0,133.0 1073.0,165.0 1117.0,165.0"/>
+<path class="grant" d="M1028.6,221.0 C1072.8,221.0 1072.8,309.0 1117.0,309.0"/>
+<path class="grant" d="M1028.6,317.0 C1072.8,317.0 1072.8,453.0 1117.0,453.0"/>
+<rect class="group" x="638.2" y="190.0" width="150.0" height="62" rx="8"/>
+<text x="713.2" y="218.0" text-anchor="middle" class="mono">&lt;dep&gt;-analysis</text>
+<text x="713.2" y="236.0" text-anchor="middle" class="note">15 of 81</text>
+<rect class="grantee" x="878.6" y="286.0" width="150.0" height="62" rx="8"/>
+<text x="953.6" y="314.0" text-anchor="middle" class="mono">&lt;dep&gt;-test-full</text>
+<text x="953.6" y="332.0" text-anchor="middle" class="note">15 of 81</text>
+<rect class="group" x="398.2" y="118.0" width="150.0" height="46" rx="8"/>
+<text x="473.2" y="146.0" text-anchor="middle" class="mono">&lt;ds&gt;-analysis</text>
+<rect class="grantee" x="878.6" y="190.0" width="150.0" height="62" rx="8"/>
+<text x="953.6" y="218.0" text-anchor="middle" class="mono">&lt;ds&gt;-test-full</text>
+<text x="953.6" y="236.0" text-anchor="middle" class="note">79 of 81</text>
+<rect class="group" x="638.2" y="110.0" width="150.0" height="46" rx="8"/>
+<text x="713.2" y="138.0" text-anchor="middle" class="mono">common-analysis</text>
+<rect class="grantee" x="878.2" y="110.0" width="150.8" height="46" rx="8"/>
+<text x="953.6" y="138.0" text-anchor="middle" class="mono">common-test-full</text>
+<rect class="principal" x="30.0" y="110.0" width="278.2" height="62" rx="8"/>
+<text x="169.1" y="138.0" text-anchor="middle" class="mono">notebook-&lt;ds&gt;</text>
+<text x="169.1" y="156.0" text-anchor="middle" class="note">@notebooks-314505.iam.gserviceaccount.com</text>
+<rect class="resource" x="1119.0" y="110.0" width="233.0" height="110" rx="8"/>
+<text x="1133.0" y="129.0" class="h" font-size="12">StorageObjectAndBucketMutator</text>
+<text x="1133.0" y="148.0" class="mono" font-size="11.5">cpg-common-test</text>
+<text x="1133.0" y="164.0" class="mono" font-size="11.5">cpg-common-test-analysis</text>
+<text x="1133.0" y="180.0" class="mono" font-size="11.5">cpg-common-test-tmp</text>
+<text x="1133.0" y="196.0" class="mono" font-size="11.5">cpg-common-test-upload</text>
+<text x="1133.0" y="212.0" class="mono" font-size="11.5">cpg-common-test-web</text>
+<rect class="resource" x="1119.0" y="254.0" width="317.0" height="110" rx="8"/>
+<text x="1133.0" y="273.0" class="h" font-size="12">StorageObjectAndBucketMutator  - 79 of 81</text>
+<text x="1133.0" y="292.0" class="mono" font-size="11.5">cpg-&lt;ds&gt;-test  (79/81)</text>
+<text x="1133.0" y="308.0" class="mono" font-size="11.5">cpg-&lt;ds&gt;-test-analysis  (79/81)</text>
+<text x="1133.0" y="324.0" class="mono" font-size="11.5">cpg-&lt;ds&gt;-test-tmp  (79/81)</text>
+<text x="1133.0" y="340.0" class="mono" font-size="11.5">cpg-&lt;ds&gt;-test-upload  (79/81)</text>
+<text x="1133.0" y="356.0" class="mono" font-size="11.5">cpg-&lt;ds&gt;-test-web  (79/81)</text>
+<rect class="resource" x="1119.0" y="398.0" width="317.0" height="110" rx="8"/>
+<text x="1133.0" y="417.0" class="h" font-size="12">StorageObjectAndBucketMutator  - 15 of 81</text>
+<text x="1133.0" y="436.0" class="mono" font-size="11.5">cpg-&lt;dep&gt;-test  (15/81)</text>
+<text x="1133.0" y="452.0" class="mono" font-size="11.5">cpg-&lt;dep&gt;-test-analysis  (15/81)</text>
+<text x="1133.0" y="468.0" class="mono" font-size="11.5">cpg-&lt;dep&gt;-test-tmp  (15/81)</text>
+<text x="1133.0" y="484.0" class="mono" font-size="11.5">cpg-&lt;dep&gt;-test-upload  (15/81)</text>
+<text x="1133.0" y="500.0" class="mono" font-size="11.5">cpg-&lt;dep&gt;-test-web  (15/81)</text>
+<text x="30" y="578" class="note" font-size="12">&lt;ds&gt; = the principal's own key; &lt;dep&gt; = any other key reached through nesting</text>
+<text x="30" y="596" class="note" font-size="12">Resources reached per principal: 5 (2 principals), 10 (64 principals), 15 (4 principals), 20 (1 principal), 25 (1 principal), 30 (2 principals), 35 (1 principal), 45 (1 principal), 50 (1 princip…</text>
+<text x="30" y="614" class="note" font-size="12">Most reached: notebook-talos@notebooks-314505.iam.gserviceaccount.com (240), notebook-seqr@notebooks-314505.iam.gserviceaccount.com (240), notebook-rare-disease@notebooks-314505.iam.gserviceacco…</text>
+<rect class="off" x="30" y="646" width="1406.0" height="354" rx="8"/>
+<text x="46" y="668" class="h" fill="#374151">In scope but NOT reached (resources carrying the principal's own key)</text>
+<text x="46" y="690" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-archive</tspan> - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator)</text>
+<text x="46" y="710" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-hail</tspan> - held by &lt;ds&gt;-full-003@hail-295901.iam.gserviceaccount.com (StorageObjectAndBucketMutator), &lt;ds&gt;-full-011@hail-295901.iam.gserviceaccount.com (StorageObjectAndBucketMutat…</text>
+<text x="46" y="730" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main</tspan> - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator), &lt;ds&gt;-main-create (StorageViewerAndCreator)</text>
+<text x="46" y="750" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main-analysis</tspan> - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator), &lt;ds&gt;-main-create (StorageViewerAndCreator)</text>
+<text x="46" y="770" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main-nfwork</tspan> - held by seqera-full@&lt;ds&gt;-165049.iam.gserviceaccount.com (StorageObjectAndBucketMutator), seqera-full@&lt;ds&gt;-220215.iam.gserviceaccount.com (StorageObjectAndBucketMu…</text>
+<text x="46" y="790" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main-tmp</tspan> - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator), &lt;ds&gt;-main-create (StorageViewerAndCreator)</text>
+<text x="46" y="810" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main-upload</tspan> - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator), &lt;ds&gt;-upload (StorageObjectAndBucketMutator)</text>
+<text x="46" y="830" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main-web</tspan> - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator), &lt;ds&gt;-main-read (StorageViewerAndCreator)</text>
+<text x="46" y="850" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-test-nfwork</tspan> (79 of 81) - held by seqera-test@&lt;ds&gt;-165049.iam.gserviceaccount.com (StorageObjectAndBucketMutator), seqera-test@&lt;ds&gt;-220215.iam.gserviceaccount.com (StorageObject…</text>
+<text x="46" y="870" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-release</tspan> (29 of 81) - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator)</text>
+<text x="46" y="890" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;dep&gt;-main-upload-&lt;ds&gt;-ont</tspan> (1 of 81) - held by &lt;dep&gt;-full (StorageObjectAndBucketMutator), &lt;dep&gt;-upload (StorageObjectAndBucketMutator)</text>
+<text x="46" y="910" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main-upload-&lt;dep&gt;-ont</tspan> (1 of 81) - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator), &lt;ds&gt;-upload (StorageObjectAndBucketMutator)</text>
+<text x="46" y="930" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main-upload-agrf</tspan> (1 of 81) - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator), &lt;ds&gt;-upload (StorageObjectAndBucketMutator)</text>
+<text x="46" y="950" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main-upload-db-garvan-manifest</tspan> (1 of 81) - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator), &lt;ds&gt;-upload (StorageObjectAndBucketMutator)</text>
+<text x="46" y="970" fill="#374151" font-size="12"><tspan class="mono">cpg-&lt;ds&gt;-main-upload-db-ont-sc-manifest</tspan> (1 of 81) - held by &lt;ds&gt;-full (StorageObjectAndBucketMutator), &lt;ds&gt;-upload (StorageObjectAndBucketMutator)</text>
+<text x="46" y="990" class="note">... 3 more in pattern.json</text>
+<path class="member" d="M30,1034 L70,1034"/>
+<text x="80" y="1038">is a member of</text>
+<path class="member" d="M200.8,1034 L240.8,1034"/>
+<text x="250.8" y="1038">loop: nested in another group of the same pattern</text>
+<path class="back" d="M623.6,1034 L663.6,1034"/>
+<text x="673.6" y="1038">member of a group in the same/earlier column</text>
+<path class="grant" d="M1010.4000000000001,1034 L1050.4,1034"/>
+<text x="1060.4" y="1038">grant matching the role filter</text>
+<rect class="grantee" x="1296.4" y="1025" width="24" height="18" rx="3"/>
+<text x="1328.4" y="1038">group holding the role</text>
+<text x="30" y="1064" class="note">Scope: access recorded in this Pulumi state only. Manual grants, other stacks and inherited org/folder IAM are not shown.</text>
+</svg>
